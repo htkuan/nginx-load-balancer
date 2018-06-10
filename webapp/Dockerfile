@@ -11,4 +11,4 @@ COPY . /app
 
 EXPOSE 8000
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+#ENTRYPOINT ["/app/entrypoint.sh"]

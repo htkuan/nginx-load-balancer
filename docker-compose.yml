@@ -5,7 +5,8 @@ services:
     restart: always
     image: htkuan/webapp
     build: ./webapp
-    entrypoint: /app/entrypoint.sh
+#    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn webapp.wsgi:application -b 0.0.0.0:8000
     ports:
       - 8000:8000
     volumes:

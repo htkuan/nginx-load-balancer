@@ -7,6 +7,19 @@ services:
     build: ./webapp
 #    command: python manage.py runserver 0.0.0.0:8000
     command: gunicorn webapp.wsgi:application -b 0.0.0.0:8000
+    environment:
+      - APP=webapp_1
+    volumes:
+      - ./webapp:/app/
+
+  webapp2:
+    restart: always
+    image: htkuan/webapp
+    build: ./webapp
+#    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn webapp.wsgi:application -b 0.0.0.0:8001
+    environment:
+      - APP=webapp_2
     volumes:
       - ./webapp:/app/
 
@@ -15,8 +28,10 @@ services:
     image: htkuan/webserver:load
     build: ./webserver
     ports:
-      - "8000:8000"
+      - "8000:80"
     links:
       - webapp
+      - webapp2
     depends_on:
       - webapp
+      - webapp2

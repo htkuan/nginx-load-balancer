@@ -3,7 +3,7 @@ version: "3.4"
 services:
   webapp:
     restart: always
-    image: htkuan/webapp
+    image: htkuan/webapp:lb
     build: ./webapp
 #    command: python manage.py runserver 0.0.0.0:8000
     command: gunicorn webapp.wsgi:application -b 0.0.0.0:8000
@@ -14,7 +14,7 @@ services:
 
   webapp2:
     restart: always
-    image: htkuan/webapp
+    image: htkuan/webapp:lb
     build: ./webapp
 #    command: python manage.py runserver 0.0.0.0:8000
     command: gunicorn webapp.wsgi:application -b 0.0.0.0:8001
@@ -25,7 +25,7 @@ services:
 
   webserver:
     restart: always
-    image: htkuan/webserver:load
+    image: htkuan/webserver:lb
     build: ./webserver
     ports:
       - "8000:80"
